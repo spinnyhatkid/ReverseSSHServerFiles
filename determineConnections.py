@@ -13,8 +13,8 @@ with open("/var/www/ssshp", "r") as in_file:
 
 ports = []
 try:
-    b = bash_command("netstat -l | grep tcp | grep LISTEN | grep '*:[[:digit:]]'")
-    ports.append(b.split()[3][2:])
+    b = bash_command("netstat -l | grep tcp | grep LISTEN | grep '*:[[:digit:]]'").splitlines()
+    ports = map(lambda line: line.split()[3][2:], b)
 except:
     ports = ports
 
