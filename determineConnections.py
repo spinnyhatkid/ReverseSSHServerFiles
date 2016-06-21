@@ -16,12 +16,7 @@ try:
     b = bash_command("netstat -l | grep tcp | grep LISTEN | grep '*:[[:digit:]]'").splitlines()
     ports = map(lambda line: line.split()[3][2:], b)
 except:
-    ports = ports
-
-new = list(set(ports) - set(existing))
-for port in new:
-    return_port = str(int(port) + 500)
-    bash_call("ssh -fNL %s:localhost:5432 -p %s localhost" % (return_port, port))
+    ports = existing
 
 with open("/var/www/ssshp", "w") as out_file:
     out_file.write('\n'.join(ports))
