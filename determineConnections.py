@@ -20,7 +20,7 @@ try:
     ports = map(lambda line: line.split()[3][2:], b)
     ports = filter(lambda port: int(port) >= min_port and int(port) <= max_port, ports)
 except:
-    ports = existing
+    ports = []
 
 with open("/var/www/ssshp", "w") as out_file:
     out_file.write('\n'.join(ports))
