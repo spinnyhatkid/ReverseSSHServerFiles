@@ -28,7 +28,7 @@ with open("/var/www/ssshp", "r") as in_file:
             if re.search("db_nmap", bash_command("ssh -p %d -o StrictHostKeyChecking=no localhost ps aux" % (int(port) + 1000))) is not None:
                 ports[p] += ",Nmap"
             else:
-                ports[p] += "," + bash_command("ssh -p %d -o StrictHostKeyChecking=no localhost /etc/penScanCall.py -t s" % (int(port) + 1000))
+                ports[p] += "," + bash_command("ssh -p %d -o StrictHostKeyChecking=no localhost /etc/penScanCall.py -t s" % (int(port) + 1000)).rstrip('\n')
     except:
         ports = []
 
